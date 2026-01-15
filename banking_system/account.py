@@ -9,19 +9,21 @@ class Account(ABC):
             raise InvalidAmountError("Deposit amount must be positive")
         
         Account._account_counter+=1
-        self.account_number += Account._account_counter
+        self.account_number = Account._account_counter
         self.balance = initial_balance
         self.transactions = []
     
-    def deposit(self,amount):
+    def deposit(self,amount, record_tx=True):
         if(amount<=0):
             raise InvalidAmountError("Deposit amount must be positive")
         
         self.balance +=amount
-        self._add_transaction(amount,"deposit")
+        
+        if record_tx:
+            self._add_transaction(amount,"deposit")
         
     @abstractmethod
-    def withdraw(self,amount):
+    def withdraw(self,amount, record_tx):
         pass
         
     def _add_transaction(self,amount,tx_type,desc=""):

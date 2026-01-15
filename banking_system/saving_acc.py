@@ -6,7 +6,7 @@ from exception import (InvalidAmountError, InsufficientBalanceError)
 class SavingAccount(Account):
     MIN_BALANCE = 500
     
-    def withdraw(self, amount, record_tx):
+    def withdraw(self, amount, record_tx=True):
         if amount<=0:
             raise InvalidAmountError("Withdraw amount must be positive")
         

@@ -6,11 +6,11 @@ class Bank:
     def __init__(self):
         self.accounts = {}
         
-    def create_account(self,acc_type,initial_balance,record_tx):
+    def create_account(self,acc_type,initial_balance):
         if(acc_type=="saving"):
-            acc = SavingAccount(initial_balance,record_tx)
+            acc = SavingAccount(initial_balance)
         elif(acc_type=="current"):
-            acc = CurrentAccount(initial_balance,record_tx)
+            acc = CurrentAccount(initial_balance)
         else:
             raise ValueError("Invalid Account Type")
         
