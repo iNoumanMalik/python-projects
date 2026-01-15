@@ -5,7 +5,7 @@ from exception import (InvalidAmountError, InsufficientBalanceError)
 class CurrentAccount(Account):
     OVERDRAFT_LIMIT = 1000
     
-    def withdraw(self, amount):
+    def withdraw(self, amount,record_tx):
         if amount<0:
             raise InvalidAmountError("Withdraw amount must be positive")
         
@@ -13,4 +13,6 @@ class CurrentAccount(Account):
             raise InsufficientBalanceError("Overdraft limit exceeds")
             
         self.balance -= amount
-        self._add_transaction(amount,"withdraw", "Current Account")
+        
+        if record_tx:
+            self._add_transaction(amount,"withdraw")
