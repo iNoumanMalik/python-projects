@@ -1,6 +1,6 @@
 # this is part I - calculate average
 def find_average(): 
-    with open("students.csv") as f:
+    with open("data/students.csv") as f:
         header = f.readline()
     
         for line in f:  
@@ -24,7 +24,7 @@ def add_contact():
     name = input("Enter name: ")
     phone = input("Enter contact number: ").strip()
     
-    with open("contactbook.txt","a") as f:
+    with open("data/contactbook.txt","a") as f:
         f.write(f"{name},{phone}\n")
         
     # if name and phone:
@@ -36,7 +36,7 @@ def add_contact():
 
 def search_contact():
     username = input("Enter the name of user: ")
-    with open("contactbook.txt") as f:
+    with open("data/contactbook.txt") as f:
         for line in f:
             line = line.split(",")
             if line[0] == username:

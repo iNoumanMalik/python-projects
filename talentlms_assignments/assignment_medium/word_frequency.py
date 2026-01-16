@@ -20,7 +20,7 @@ def find_word_freq(data):
 with open("demotext.txt","w") as f:
     f.write("I am Nouman. I am from Islamabad. Islamabad is a beautiful city.")
     
-with open("demotext.txt") as f: #rt is default that's why we don't usually write
+with open("data/demotext.txt") as f: #rt is default that's why we don't usually write
     data = f.read()
     # print(data)
 
