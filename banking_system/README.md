@@ -30,6 +30,7 @@ This project focuses on clean architecture, business rules, and backend-style de
 
 ## 🗂️ Project Structure
 
+```
 banking_system/
 │
 ├── main.py # Entry point
@@ -39,8 +40,7 @@ banking_system/
 ├── current_acc.py # Current account logic
 ├── transaction.py # Transaction model
 └── exception.py # Custom exceptions
-
-
+```
 ---
 
 ## ▶️ How to Run
