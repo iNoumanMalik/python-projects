@@ -6,10 +6,8 @@ def random_secret():
     return SECRET_WORDS[random_integer]
 
 
-def user_guess_word(random_word, attempts):
-    
-    guessed_letters = []
-    
+def user_guess_word(random_word, attempts):  
+    guessed_letters = set()
     while attempts > 0:
         print(f"Remaining attempts: {attempts}")   
         user_guess = input("Your choice: ").lower()
@@ -19,19 +17,20 @@ def user_guess_word(random_word, attempts):
             continue
         
         if user_guess in random_word:
-            guessed_letters.append(user_guess)
+            guessed_letters.add(user_guess)
             print("Correct")
+            print(len(guessed_letters))
         else:
             print("Wrong")
             attempts = attempts - 1
-            
-        if len(guessed_letters) != len(random_word):
+        
+        if guessed_letters != set(random_word):
             continue
         break
     
     print(guessed_letters)       
     
-    if guessed_letters == random_word:
+    if guessed_letters == set(random_word): # we compare same elements even ordering is changed, it does not affect
         print("You win")
 
 
@@ -51,4 +50,5 @@ def main():
     print(random_word)
     display_progress(random_word)
     
+
 main()
