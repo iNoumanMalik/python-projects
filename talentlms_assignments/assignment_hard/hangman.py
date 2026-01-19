@@ -8,6 +8,7 @@ def random_secret():
 
 def user_guess_word(random_word, attempts):  
     guessed_letters = set()
+    wrong_guessed = set()
     while attempts > 0:
         print(f"Remaining attempts: {attempts}")   
         user_guess = input("Your choice: ").lower()
@@ -16,23 +17,30 @@ def user_guess_word(random_word, attempts):
             print("Enter one character!")
             continue
         
+        if user_guess in random_word and user_guess in guessed_letters:
+            print("You already guessed this word")
+        
         if user_guess in random_word:
             guessed_letters.add(user_guess)
             print("Correct")
             handle_display(guessed_letters, random_word)
         else:
             print("Wrong")
-            attempts = attempts - 1
+            if user_guess not in wrong_guessed:
+                attempts = attempts - 1
+                wrong_guessed.add(user_guess)
+            else:
+                print("You are guessing the wrong word again")
         
         if guessed_letters != set(random_word):
             continue
         break   
     
     if guessed_letters == set(random_word): # we compare same elements even ordering is changed, it does not affect
-        print("You win")
+        print("\nYou win... Hurray")
     
     if attempts == 0:
-        print("\nYou lost ... Hurray!")
+        print("\nYou lost ... Sad!")
 
 
 
