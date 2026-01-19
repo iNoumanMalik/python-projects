@@ -1,10 +1,18 @@
 import random
 
 def random_secret():
-    random_integer = random.randint(1,5)
+    random_integer = random.randint(0,4)
     SECRET_WORDS = ["cinema","dress","keyboard","fantastic","enthusiastic"]
     return SECRET_WORDS[random_integer]
 
+def find_char_position(user_guess, random_word):
+    positions = []
+    for index,value in enumerate(random_word):
+        if value == user_guess:
+            positions.append(index)
+    
+    print(positions)
+    return positions
 
 def user_guess_word(random_word, attempts):  
     guessed_letters = set()
@@ -19,7 +27,7 @@ def user_guess_word(random_word, attempts):
         if user_guess in random_word:
             guessed_letters.add(user_guess)
             print("Correct")
-            print(len(guessed_letters))
+            find_char_position(user_guess, random_word)
         else:
             print("Wrong")
             attempts = attempts - 1
