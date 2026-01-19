@@ -5,14 +5,6 @@ def random_secret():
     SECRET_WORDS = ["cinema","dress","keyboard","fantastic","enthusiastic"]
     return SECRET_WORDS[random_integer]
 
-def find_char_position(user_guess, random_word):
-    positions = []
-    for index,value in enumerate(random_word):
-        if value == user_guess:
-            positions.append(index)
-    
-    print(positions)
-    return positions
 
 def user_guess_word(random_word, attempts):  
     guessed_letters = set()
@@ -27,36 +19,43 @@ def user_guess_word(random_word, attempts):
         if user_guess in random_word:
             guessed_letters.add(user_guess)
             print("Correct")
-            find_char_position(user_guess, random_word)
+            handle_display(guessed_letters, random_word)
         else:
             print("Wrong")
             attempts = attempts - 1
         
         if guessed_letters != set(random_word):
             continue
-        break
-    
-    print(guessed_letters)       
+        break   
     
     if guessed_letters == set(random_word): # we compare same elements even ordering is changed, it does not affect
         print("You win")
-
-
-def display_progress(random_word):
-    ATTEMPTS = 5
     
-    total_words = len(random_word)
-    for _ in range(total_words):
-        print("_", end=" ")
-        
-    print("\n\n____GUESS THE WORD____")
-    user_guess_word(random_word,ATTEMPTS)
+    if attempts == 0:
+        print("\nYou lost ... Hurray!")
+
+
+
+def handle_display(guessed_letters, random_word):
+    display_progress(guessed_letters, random_word)
+    
+    
+def display_progress(guessed_letters, random_word):
+    print("\n")
+    for char in random_word:
+        print(char if char in guessed_letters else "_", end=" ")
+    if(guessed_letters != set(random_word)):
+        print("\n\n____GUESS THE WORD____")
+    
+    
     
 
 def main():
+    ATTEMPTS = 5
     random_word = random_secret()
-    print(random_word)
-    display_progress(random_word)
+    guessed_letters = set()
+    display_progress(guessed_letters,random_word)
+    user_guess_word(random_word,ATTEMPTS)
     
 
 main()
